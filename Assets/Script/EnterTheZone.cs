@@ -73,7 +73,6 @@ public class EnterTheZone : MonoBehaviour
                 
                 Vector3 targetPos = new Vector3(0f, 1.1f, 0f);
                 Vector3 lerp = Vector3.Lerp(Player.transform.position, targetPos, 0.6f);
-                Debug.Log(lerp);
                 Player.transform.position = lerp;
                 if (Player.transform.position == new Vector3(0f, 1.1f, 0f) && Enemi !=null)
                 {
