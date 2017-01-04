@@ -63,19 +63,21 @@ public class EnterTheZone : MonoBehaviour
                 {
                     Player.GetComponent<Collision_object>().setIsCollision(false);
                     Player.GetComponent<Hitting>().setIsHitting(false);
-                    damage();
                     moveForward = false;
                     moveBackward = true;
+                    damage();
                 }
             }
             if (moveBackward)
             {
-
+                
                 Vector3 targetPos = new Vector3(0f, 1.1f, 0f);
-                Vector3 lerp = Vector3.Lerp(Player.transform.position, targetPos, 0.3f);
+                Vector3 lerp = Vector3.Lerp(Player.transform.position, targetPos, 0.6f);
+                Debug.Log(lerp);
                 Player.transform.position = lerp;
-                if (Player.transform.position == new Vector3(0f, 1.1f, 0f))
+                if (Player.transform.position == new Vector3(0f, 1.1f, 0f) && Enemi !=null)
                 {
+                    
                     moveBackward = false;
                 }
             }
@@ -87,7 +89,8 @@ public class EnterTheZone : MonoBehaviour
                 if (Enemi.GetComponent<EnemiMovement>().getDirection() == Directions.Left)
                 {
                     if (Input.GetKeyDown(KeyCode.LeftArrow))
-                    {
+                    {                   
+
                         anim.SetTrigger(hit);
                         Player.transform.rotation = Quaternion.LookRotation(new Vector3(-1, 0, 0));
                         Player.GetComponent<Hitting>().setIsHitting(true);
@@ -96,7 +99,8 @@ public class EnterTheZone : MonoBehaviour
                 if (Enemi.GetComponent<EnemiMovement>().getDirection() == Directions.Right)
                 {
                     if (Input.GetKeyDown(KeyCode.RightArrow))
-                    {
+                    {                    
+
                         anim.SetTrigger(hit);
                         Player.transform.rotation = Quaternion.LookRotation(new Vector3(1, 0, 0));
                         Player.GetComponent<Hitting>().setIsHitting(true);
@@ -105,7 +109,8 @@ public class EnterTheZone : MonoBehaviour
                 if (Enemi.GetComponent<EnemiMovement>().getDirection() == Directions.Down)
                 {
                     if (Input.GetKeyDown(KeyCode.DownArrow))
-                    {
+                    {                    
+
                         anim.SetTrigger(hit);
                         Player.transform.rotation = Quaternion.LookRotation(new Vector3(0, 0, -1));
                         Player.GetComponent<Hitting>().setIsHitting(true);
@@ -115,7 +120,8 @@ public class EnterTheZone : MonoBehaviour
                 if (Enemi.GetComponent<EnemiMovement>().getDirection() == Directions.Up)
                 {
                     if (Input.GetKeyDown(KeyCode.UpArrow))
-                    {
+                    {                  
+
                         anim.SetTrigger(hit);
                         Player.transform.rotation = Quaternion.LookRotation(new Vector3(0, 0, 1));
                         Player.GetComponent<Hitting>().setIsHitting(true);
