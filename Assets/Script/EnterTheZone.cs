@@ -76,7 +76,7 @@ public class EnterTheZone : MonoBehaviour
                 if (Player.transform.position == new Vector3(0f, 1.1f, 0f))
                 {
                     moveBackward = false;
-                    Player.GetComponent<Hit>().setIsHitting(false);
+                    Player.GetComponent<Hitting>().setIsHitting(false);
                 }
             }
 
@@ -90,7 +90,7 @@ public class EnterTheZone : MonoBehaviour
                     {
                         anim.SetTrigger(hit);
                         Player.transform.rotation = Quaternion.LookRotation(new Vector3(-1, 0, 0));
-                        Player.GetComponent<Hit>().setIsHitting(true);
+                        Player.GetComponent<Hitting>().setIsHitting(true);
                     }
                 }
                 if (Enemi.GetComponent<EnemiMovement>().getDirection() == Directions.Right)
@@ -99,7 +99,7 @@ public class EnterTheZone : MonoBehaviour
                     {
                         anim.SetTrigger(hit);
                         Player.transform.rotation = Quaternion.LookRotation(new Vector3(1, 0, 0));
-                        Player.GetComponent<Hit>().setIsHitting(true);
+                        Player.GetComponent<Hitting>().setIsHitting(true);
                     }
                 }
                 if (Enemi.GetComponent<EnemiMovement>().getDirection() == Directions.Down)
@@ -108,7 +108,7 @@ public class EnterTheZone : MonoBehaviour
                     {
                         anim.SetTrigger(hit);
                         Player.transform.rotation = Quaternion.LookRotation(new Vector3(0, 0, -1));
-                        Player.GetComponent<Hit>().setIsHitting(true);
+                        Player.GetComponent<Hitting>().setIsHitting(true);
 
                     }
                 }
@@ -118,7 +118,7 @@ public class EnterTheZone : MonoBehaviour
                     {
                         anim.SetTrigger(hit);
                         Player.transform.rotation = Quaternion.LookRotation(new Vector3(0, 0, 1));
-                        Player.GetComponent<Hit>().setIsHitting(true);
+                        Player.GetComponent<Hitting>().setIsHitting(true);
 
                     }
                 }

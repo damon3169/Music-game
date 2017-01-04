@@ -33,11 +33,11 @@ public class Collision_object : MonoBehaviour
                 {
                     col.gameObject.GetComponent<KnockBack>().CallKnockBack(-4);
                 }
-                if (col.gameObject.name == "Enemi_change(Clone)" && !GetComponent<Hit>().getIsHitting())
+                if (col.gameObject.name == "Enemi_change(Clone)" && !GetComponent<Hitting>().getIsHitting())
                 {
                     col.gameObject.GetComponent<KnockBack>().CallKnockBack(-4);
                 }
-                if (!GetComponent<Hit>().getIsHitting())
+                if (!GetComponent<Hitting>().getIsHitting())
                 {
                     GetComponent<Life>().TakeDamage(0, true);
                 }

@@ -38,7 +38,7 @@ public class Directions_change : MonoBehaviour
             transform.position = new Vector3(transform.position.z, 0, 0);
 
         }
-        GameObject.FindGameObjectWithTag("Player").GetComponent<Hit>().setIsHitting(false);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Hitting>().setIsHitting(false);
         transform.rotation = Quaternion.LookRotation(Vector3.zero - transform.position);
         GetComponent<Rigidbody>().velocity = transform.forward * speed;
         GetComponent<EnemiMovement>().setDirection();
