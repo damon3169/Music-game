@@ -14,6 +14,8 @@ public class Life : MonoBehaviour
     private bool isDead = false;
 
     private GameObject zone;
+
+    private Transform LifeBar;
     void Start()
     {
         pourcentage = (float)(100.0f / life) / 100.0f;
@@ -27,18 +29,19 @@ public class Life : MonoBehaviour
 
     public void healthBar()
     {
-        GameObject LifeBar = GameObject.Find("LifeBar");
-        Transform DamageTaken = LifeBar.transform.Find("DamageTaken");
+        LifeBar = GameObject.Find("LifeBar").transform;
+        Transform DamageTaken = LifeBar.Find("DamageTaken");
         Transform bar = DamageTaken.transform.Find("Life");
         //Diminue la taille de la barre de vie quand besoin
         bar.transform.localScale += new Vector3(-pourcentage, 0, 0);
     }
 
-    public bool TakeDamage(int speed,bool collision)
+    public bool TakeDamage(int speed, bool collision)
     {
         isDead = false;
         if (life > 0)
         {
+
             life--;
 
             if (this.tag == "Player")
@@ -75,6 +78,19 @@ public class Life : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider col)
+    {
+        if (tag == "Enemi")
+        {
+            if (col.gameObject.tag == "Zone" && col.gameObject.name != "Ground" && col.gameObject.name != "ColorBar")
+            {
+                zone = col.gameObject;
+            }
+        }
+
+    }
+
+
+    void OnTriggerExit(Collider col)
     {
         if (tag == "Enemi")
         {

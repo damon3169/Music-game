@@ -62,6 +62,7 @@ public class EnterTheZone : MonoBehaviour
                 if (Player.GetComponent<Collision_object>().getIsCollision())
                 {
                     Player.GetComponent<Collision_object>().setIsCollision(false);
+                    Player.GetComponent<Hitting>().setIsHitting(false);
                     damage();
                     moveForward = false;
                     moveBackward = true;
@@ -76,7 +77,6 @@ public class EnterTheZone : MonoBehaviour
                 if (Player.transform.position == new Vector3(0f, 1.1f, 0f))
                 {
                     moveBackward = false;
-                    Player.GetComponent<Hitting>().setIsHitting(false);
                 }
             }
 
@@ -198,6 +198,12 @@ public class EnterTheZone : MonoBehaviour
     void OnTriggerStay(Collider other)
     {
         image.GetComponent<Renderer>().material.color = Color.red;
+    }
+
+      void OnTriggerExit(Collider other)
+    {
+        image.GetComponent<Renderer>().material.color = Color.green;
+        Enemi = null;
     }
 }
 
