@@ -74,7 +74,7 @@ public class EnterTheZone : MonoBehaviour
                 Vector3 targetPos = new Vector3(0f, 1.1f, 0f);
                 Vector3 lerp = Vector3.Lerp(Player.transform.position, targetPos, 0.6f);
                 Player.transform.position = lerp;
-                if (Player.transform.position == new Vector3(0f, 1.1f, 0f) && Enemi !=null)
+                if (Player.transform.position == new Vector3(0f, 1.1f, 0f))
                 {
                     
                     moveBackward = false;
@@ -93,6 +93,8 @@ public class EnterTheZone : MonoBehaviour
                         anim.SetTrigger(hit);
                         Player.transform.rotation = Quaternion.LookRotation(new Vector3(-1, 0, 0));
                         Player.GetComponent<Hitting>().setIsHitting(true);
+                        moveForward = true;
+
                     }
                 }
                 if (Enemi.GetComponent<EnemiMovement>().getDirection() == Directions.Right)
@@ -103,6 +105,8 @@ public class EnterTheZone : MonoBehaviour
                         anim.SetTrigger(hit);
                         Player.transform.rotation = Quaternion.LookRotation(new Vector3(1, 0, 0));
                         Player.GetComponent<Hitting>().setIsHitting(true);
+                        moveForward = true;
+
                     }
                 }
                 if (Enemi.GetComponent<EnemiMovement>().getDirection() == Directions.Down)
@@ -113,6 +117,7 @@ public class EnterTheZone : MonoBehaviour
                         anim.SetTrigger(hit);
                         Player.transform.rotation = Quaternion.LookRotation(new Vector3(0, 0, -1));
                         Player.GetComponent<Hitting>().setIsHitting(true);
+                        moveForward = true;
 
                     }
                 }
@@ -120,17 +125,16 @@ public class EnterTheZone : MonoBehaviour
                 {
                     if (Input.GetKeyDown(KeyCode.UpArrow))
                     {                  
-
                         anim.SetTrigger(hit);
                         Player.transform.rotation = Quaternion.LookRotation(new Vector3(0, 0, 1));
                         Player.GetComponent<Hitting>().setIsHitting(true);
+                        moveForward = true;
 
                     }
                 }
-                if (anim.GetBool("Hit"))
+              /*  if (anim.GetBool("Hit"))
                 {
-                    moveForward = true;
-                }
+                }*/
             }
             else
             {
