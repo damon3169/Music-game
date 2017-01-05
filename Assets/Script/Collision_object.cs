@@ -8,6 +8,9 @@ public class Collision_object : MonoBehaviour
     // Use this for initialization
     GameObject zone;
 
+    [SerializeField]
+    private GameObject Particle;
+
 
 
     private bool isCollision = false;
@@ -32,6 +35,8 @@ public class Collision_object : MonoBehaviour
                 if (col.gameObject.name == "Enemi(Clone)" || col.gameObject.name == "Enemi 1(Clone)")
                 {
                     col.gameObject.GetComponent<KnockBack>().CallKnockBack(-4);
+                    Instantiate(Particle, col.transform.position, col.transform.rotation);
+
                 }
                 if (col.gameObject.name == "Enemi_change(Clone)" && !GetComponent<Hitting>().getIsHitting())
                 {
