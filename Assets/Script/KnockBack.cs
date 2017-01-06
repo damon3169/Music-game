@@ -30,7 +30,7 @@ public class KnockBack : MonoBehaviour
         {
             if (isCall)
             {
-                GetComponent<Rigidbody>().velocity = veloObject;
+                GetComponent<Rigidbody>().velocity = this.GetComponent<EnemiMovement>().getSpeed() * transform.forward;
             }
             isCall = false;
         }

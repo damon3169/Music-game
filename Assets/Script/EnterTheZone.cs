@@ -15,9 +15,10 @@ public class EnterTheZone : MonoBehaviour
 
     private bool isDead = false;
 
+    [SerializeField]
     private float errorTimer = 1.0f;
 
-    private float now;
+    private float now;  
     private Animator anim;
 
     private int hit;
@@ -25,7 +26,6 @@ public class EnterTheZone : MonoBehaviour
     private bool moveForward = false;
     private bool moveBackward = false;
 
-    private float _enteringSceneTargetZPos = 10.0f;
 
 
     void Start()
@@ -70,13 +70,11 @@ public class EnterTheZone : MonoBehaviour
             }
             if (moveBackward)
             {
-                
                 Vector3 targetPos = new Vector3(0f, 1.1f, 0f);
                 Vector3 lerp = Vector3.Lerp(Player.transform.position, targetPos, 0.6f);
                 Player.transform.position = lerp;
                 if (Player.transform.position == new Vector3(0f, 1.1f, 0f))
                 {
-                    
                     moveBackward = false;
                 }
             }
@@ -84,17 +82,14 @@ public class EnterTheZone : MonoBehaviour
             if (Enemi != null)
             {
 
-
                 if (Enemi.GetComponent<EnemiMovement>().getDirection() == Directions.Left)
                 {
                     if (Input.GetKeyDown(KeyCode.LeftArrow))
                     {                   
-
                         anim.SetTrigger(hit);
                         Player.transform.rotation = Quaternion.LookRotation(new Vector3(-1, 0, 0));
                         Player.GetComponent<Hitting>().setIsHitting(true);
                         moveForward = true;
-
                     }
                 }
                 if (Enemi.GetComponent<EnemiMovement>().getDirection() == Directions.Right)
@@ -115,7 +110,7 @@ public class EnterTheZone : MonoBehaviour
                     {                    
 
                         anim.SetTrigger(hit);
-                        Player.transform.rotation = Quaternion.LookRotation(new Vector3(0, 0, -1));
+                        Player.transform.rotation = Quaternion.LookRotation(new Vector3(0,0,-1));
                         Player.GetComponent<Hitting>().setIsHitting(true);
                         moveForward = true;
 
@@ -129,12 +124,8 @@ public class EnterTheZone : MonoBehaviour
                         Player.transform.rotation = Quaternion.LookRotation(new Vector3(0, 0, 1));
                         Player.GetComponent<Hitting>().setIsHitting(true);
                         moveForward = true;
-
                     }
                 }
-              /*  if (anim.GetBool("Hit"))
-                {
-                }*/
             }
             else
             {
@@ -178,30 +169,25 @@ public class EnterTheZone : MonoBehaviour
 
     void damage()
     {
-        if (Enemi != null)
-        {
             isDead = Enemi.GetComponent<Life>().TakeDamage(0, false);
-            if (Enemi.gameObject.name == "Enemi_change(Clone)")
+            if (Enemi.gameObject.name == "Enemi_change(Clone)" && Enemi !=null)
             {
                 Enemi.GetComponent<Directions_change>().DirectionChangement();
             }
+
             if (isDead == true)
             {
-                image = transform.GetChild(0);
+            image = transform.GetChild(0);
                 image.GetComponent<Renderer>().material.color = Color.green;
             }
-        }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemi")
-        {
             GameObject enemi = other.gameObject;
             Enemi = other.gameObject;
             image = transform.GetChild(0);
             image.GetComponent<Renderer>().material.color = Color.red;
-        }
     }
 
     void OnTriggerStay(Collider other)
