@@ -25,12 +25,14 @@ public class menu : MonoBehaviour
 
     }
 
+    //Quit quand le joueur click sur quitter
     void onClickLeave()
     {
         Application.Quit();
     }
 
-	 void onClickLevel()
+    //Change d'écran quand le joueur click sur select levels
+    void onClickLevel()
     {
         Application.LoadLevel("Levels");
     }

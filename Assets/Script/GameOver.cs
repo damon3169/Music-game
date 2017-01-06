@@ -9,7 +9,6 @@ public class GameOver : MonoBehaviour
 
     [SerializeField]
     private Camera camera;
-    // Use this for initialization
 
     [SerializeField]
     private Text GameOverText;
@@ -18,31 +17,34 @@ public class GameOver : MonoBehaviour
 
     private float now;
 
+    //Met gameover vide 
     void Start()
     {
         GameOverText.text = "";
     }
 
-    // Update is called once per frame
     void Update()
     {
+        //Si le joueur a perdu
         if (isGameOver)
         {
+            // la camera tourne autour du joueur et indique que le joueur a perdu en écrivant Game Over sur l'écran. Au click du joueur renvoie 0 de score, la défaite du joueur et lance la fenetre de fin de niveau
             camera.transform.LookAt(GameObject.Find("Player").transform);
             camera.transform.Translate(Vector3.right * Time.deltaTime);
             GameOverText.text = "Game Over\n Push a button to continu";
             if (Input.anyKey && Time.time > now + 1)
             {
                 PlayerPrefs.SetInt("Score", 0);
-                PlayerPrefs.SetFloat("timerEnd", Time.time);
                 PlayerPrefs.SetString("status", "lost");
                 PlayerPrefs.SetInt("Score", GameObject.Find("Player").GetComponent<Score_manager>().getScore());
                 Application.LoadLevel("Level end");
             }
         }
 
+        //Si le joueur a gagné
         if (gameIsWin)
         {
+            //la camera tourne autour du joueur et indique que le joueur a perdu en écrivant Win , Au click du joueur renvoie le score, la défaite du joueur et lance la fenetre de fin de niveau
             camera.transform.LookAt(GameObject.Find("Player").transform);
             camera.transform.Translate(Vector3.right * Time.deltaTime);
             GameOverText.text = "You win\n Push a button to continu";
@@ -56,6 +58,7 @@ public class GameOver : MonoBehaviour
         }
     }
 
+    //Lance la fin de la partie défaite
     public void gameIsOver()
     {
         if (isGameOver == false)
@@ -65,11 +68,13 @@ public class GameOver : MonoBehaviour
         isGameOver = true;
     }
 
+    //Renvoie si le joueur a perdu ou non
     public bool getGameOver()
     {
         return isGameOver;
     }
 
+    //Lance la fin de partie victoire
     public void GameisWin()
     {
         if (gameIsWin == false)

@@ -11,7 +11,7 @@ public class setLevels : MonoBehaviour
 
 
 
-    // Use this for initialization
+    //Si le joueur a un highscore sur un niveau, débloque le niveau suivant
     void Start()
     {
         level1.onClick.AddListener(() => launchLevel(level1));
@@ -31,17 +31,13 @@ public class setLevels : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    //Lance le niveau
     void launchLevel(Button level)
     {
         Application.LoadLevel(level.gameObject.name);
     }
 
+    //Reviens au menu Menu
     void back()
     {
         Application.LoadLevel("Menu");

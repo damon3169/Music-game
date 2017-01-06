@@ -16,14 +16,17 @@ public class Score_manager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        //Met a jour le score
 		scoreText.text =  "Score: " + score;
 	}
 
-	public void addScore(int newScore){
+    //Permet de rajouter du score
+    public void addScore(int newScore){
 		score += newScore;
 	}
 
-	public int getScore(){
+    //Permet de récupérer le score
+    public int getScore(){
 		return score;
 	}
 

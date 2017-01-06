@@ -14,37 +14,36 @@ public class EnemiMovement : MonoBehaviour
 {
     Directions _direction = Directions.None;
 
+    //Vitesse de base de l'enemi
     [SerializeField]
     private int speed = 10;
 
-    // Use this for initialization
+    // Set la direction de base de l'enemi est le fait avancer
     void Start()
     {
        setDirection();
         GetComponent<Rigidbody>().velocity = transform.forward * speed;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    //Récupère la direction
     public Directions getDirection()
     {
         return _direction;
     }
 
+    //Modifie la vitesse
     public void setSpeed(int newSpeed)
     {
         speed = newSpeed;
     }
 
+    //Récupère la vitesse
     public int getSpeed()
     {
         return speed;
     }
 
+    //Donne une direction en fonction de la rotation
     public void setDirection()
     {
         if (transform.eulerAngles.y == 180)

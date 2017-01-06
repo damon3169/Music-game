@@ -4,16 +4,19 @@ using System.Collections.Generic;
 
 public class SpawnEnemi : MonoBehaviour
 {
-
+    //Contient le prefab des enemies de base
     [SerializeField]
     private GameObject _enemiBasePrefab = null;
 
+    //Contient le prefab des enemies qu'il faut taper deux fois
     [SerializeField]
     private GameObject _enemiDoublePrefab = null;
 
+    //Contient le prefab des enemies qui change de ligne quand on les tapes
     [SerializeField]
     private GameObject _enemiChangePrefab = null;
 
+    //Permet d'obtenir les positions des différents spawn
     [SerializeField]
     private GameObject spawnUp = null;
 
@@ -36,6 +39,7 @@ public class SpawnEnemi : MonoBehaviour
     [SerializeField]
     private int nbEnemiChange = 0;
 
+    //Min et max des timer de spawn
     [SerializeField]
     private float SpawnTimerMin = 1;
 
@@ -52,6 +56,7 @@ public class SpawnEnemi : MonoBehaviour
 
     private GameObject enemi;
 
+    //Min est max de la vitesse
     [SerializeField]
     private int MaxSpeed = 10;
 
@@ -68,6 +73,7 @@ public class SpawnEnemi : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        //Si il y a des enemies du bon type, ajouter le types dans la liste
         if (nbEnemiBase != 0)
         {
             enemies.Add("_enemiBasePrefab");
@@ -83,14 +89,15 @@ public class SpawnEnemi : MonoBehaviour
             enemies.Add("_enemiChangePrefab");
         }
 
-
+        //Prends le timer de start
         now = Time.time;
 
+        //Location de spawn, temps avant le spawn et type du premier enemie 
         randomLocation = Random.Range(1, 5);
         randomSpawn = Random.Range(SpawnTimerMin, SpawnTimerMax + 1);
         RandomType = Random.Range(0, enemies.Count);
 
-        PlayerPrefs.SetFloat("timerBegin", Time.time);
+        //Garde le nom du niveau pour l'afficher sur l'écran de fin de niveau
         PlayerPrefs.SetString("level_name", Application.loadedLevelName);
 
     }
@@ -98,16 +105,21 @@ public class SpawnEnemi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Si la partie n'est pas perdu
         if (!GetComponent<GameOver>().getGameOver())
         {
+            //Si il reste encore des enemi a faire spawn
             if (isFinish == false)
             {
+                //Si le timer entre les spawn est fini
                 if (Time.time > now + randomSpawn)
                 {
+                    //Random une zone de spawn
                     randomLocation = Random.Range(1, 5);
+                    //Si l'enemie random est de basique
                     if (enemies[RandomType] == "_enemiBasePrefab")
                     {
-
+                        //Si il spawn a cette location, le fait spawn, lui donne sa vitesse et le retir de la liste
                         if (randomLocation == 1)
                         {
                             enemi = (GameObject)Instantiate(_enemiBasePrefab, spawnUp.transform.position, spawnUp.transform.rotation);
@@ -138,6 +150,7 @@ public class SpawnEnemi : MonoBehaviour
 
                         }
 
+                        //Si il n'y a plus d'énemi de base, enlève enemie de base de la liste
                         if (nbEnemiBase == 0)
                         {
                             enemies.RemoveAt(RandomType);
@@ -214,11 +227,13 @@ public class SpawnEnemi : MonoBehaviour
                             enemies.RemoveAt(RandomType);
                         }
                     }
+                    //Random le prochain timer, prends le moment du dernier spawn et random le prochain type d'enemi
                     randomSpawn = Random.Range(SpawnTimerMin, SpawnTimerMax + 0.1f);
                     now = Time.time;
                     RandomType = Random.Range(0, enemies.Count);
                 }
 
+                //Si il n'y a plus d'enemi met isFinish a true, sinon le laisse a false
                 if (nbEnemiChange == 0 && nbEnemiDouble == 0 && nbEnemiBase == 0)
                 {
                     isFinish = true;
@@ -231,9 +246,9 @@ public class SpawnEnemi : MonoBehaviour
             }
             else
             {
+                //Si partie fini lance la victoire et inscrit dans les playersPrefs que le joueur a gagné
                 if (!GetComponent<GameOver>().getGameOver() && GameObject.FindGameObjectWithTag("Enemi") ==null)
                 {
-                    PlayerPrefs.SetFloat("timerEnd", Time.time);
                     PlayerPrefs.SetString("status", "Win");
                     GetComponent<GameOver>().GameisWin();
                 }

@@ -17,11 +17,13 @@ public class Hitting : MonoBehaviour
 
     }
 
+    //Set si le joueur frappe ou non
     public void setIsHitting(bool newState)
     {
         isHitting = newState;
     }
 
+    //get si le joueur frappe ou non
     public bool getIsHitting()
     {
         return isHitting;

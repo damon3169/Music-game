@@ -18,7 +18,7 @@ public class setMenu : MonoBehaviour
 
 
 
-    // Use this for initialization
+    // Affiche la victoireo défaite du joueur / le score du joueur/ le high score du joueur et la possibilité de revenir au menu
     void Start()
     {
         levelText.text = PlayerPrefs.GetString("level_name") + " " + PlayerPrefs.GetString("status");

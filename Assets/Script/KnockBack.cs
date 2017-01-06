@@ -10,11 +10,13 @@ public class KnockBack : MonoBehaviour
 
     private int speed;
 
+    //Durée du knockback
     [SerializeField]
     private float KnockBackDuration = 0.5f;
     // Use this for initialization
     void Start()
     {
+        //Récupère la velocité de l'objet
         veloObject = GetComponent<Rigidbody>().velocity;
         now = Time.time;
     }
@@ -22,12 +24,13 @@ public class KnockBack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Si knockback alors faire reculer l'objet
         if (isCall && now + KnockBackDuration > Time.time)
         {
             GetComponent<Rigidbody>().velocity = speed * transform.forward;
         }
         else
-        {
+        {   //Sinon le faire avancer vers le joueur avec sa précédente vitesse 
             if (isCall)
             {
                 GetComponent<Rigidbody>().velocity = this.GetComponent<EnemiMovement>().getSpeed() * transform.forward;
@@ -36,6 +39,7 @@ public class KnockBack : MonoBehaviour
         }
     }
 
+    //Permet de lancer un knockback
     public void CallKnockBack(int speedObject)
     {
         now = Time.time;

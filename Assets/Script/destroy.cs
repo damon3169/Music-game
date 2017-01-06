@@ -12,7 +12,7 @@ public class destroy : MonoBehaviour
         ps = this.GetComponent<ParticleSystem>();
     }
 
-    // Update is called once per frame
+    // Détruit la particule si l'effet est fini
     void Update()
     {
         if (ps)
